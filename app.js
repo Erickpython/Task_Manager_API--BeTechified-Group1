@@ -20,18 +20,24 @@ let tasks = [
 // ROUTES - API ENDPOINTS
 // INDEX PAGE AND GET ALL TASKS
 app.get('/', (req, res) => {
-  res.send('Welcome to the Task Management API');
+  res.status(200).send('Welcome to the Task Management API');
 });
 
 app.get('/tasks', (req, res) => {
-  res.json(tasks);
+  res.status(200).json(tasks);
 });
 
 
 // GET COMPLETED TASKS
 app.get('/tasks/completed', (req, res) => {
   const completedTasks = tasks.filter(t => t.status === "Completed");
-  res.json(completedTasks);
+  res.status(200).json(completedTasks);
+});
+
+// GET PENDING TASKS
+app.get('/tasks/pending', (req, res) => {
+  const pendingTasks = tasks.filter(t => t.status === "Pending");
+  res.status(200).json(pendingTasks);
 });
 
 
@@ -40,7 +46,7 @@ app.get('/tasks/:id', (req, res) => {
   const taskId = parseInt(req.params.id);
   const task = tasks.find(t => t.id === taskId);
   if (task) {
-    res.json(task);
+    res.status(200).json(task);
   } else {
     res.status(404).json({ message: 'Task not found' });
   }
