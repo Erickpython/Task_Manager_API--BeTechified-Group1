@@ -36,7 +36,6 @@ app.get('/tasks/completed', (req, res) => {
 });
 
 
-
 // GET A SINGLE TASK BY ID
 app.get('/tasks/:id', (req, res) => {
   const taskId = parseInt(req.params.id);
@@ -70,7 +69,6 @@ app.post('/tasks', (req, res) => {
   tasks.push(newTask);
   res.status(201).json(newTask);
 });
-
 
 
 
