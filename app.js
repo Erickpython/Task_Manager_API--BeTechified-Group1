@@ -67,7 +67,8 @@ app.post('/tasks', (req, res) => {
 
   // Check if a task with the same title already exists
   const existingTask = tasks.find(t => t.title === newTask.title);
-  if (existingTask) {
+  const existingstatus = tasks.find(t => t.status === newTask.status);
+  if (existingTask && existingstatus) {
     return res.status(409).json({ message: 'Task already exists' });
   }
 
