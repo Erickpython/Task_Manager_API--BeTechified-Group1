@@ -70,10 +70,23 @@ app.post('/tasks', (req, res) => {
   res.status(201).json(newTask);
 });
 
-
-
-
-
+app.patch('/tasks/:id', (req, res) => {
+  const task = tasks.find((t) => t.id === parseInt(req.params.id));
+  if (!task) return res.status(404).json({ message: 'Task not found' });
+  Object.assign(task, req.body);
+  res.status(200).json(task);
+});
+   
+// DELETE A TASK
+app.delete('/tasks/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+  const initialLength = tasks.length;
+  tasks = tasks.filter((t) => t.id !== id);
+  if (tasks.length === initialLength) 
+      return res.status(404).json({ message: 'Task not found' });
+  res.status(200).json({ message: 'Task deleted successfully' });
+  
+});
 
 // STARTING THE SERVER
 app.listen(port, () => {
