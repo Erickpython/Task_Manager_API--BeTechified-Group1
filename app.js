@@ -76,6 +76,8 @@ app.post('/tasks', (req, res) => {
   res.status(201).json(newTask);
 });
 
+
+// UPDATE A TASK
 app.patch('/tasks/:id', (req, res) => {
   const task = tasks.find((t) => t.id === parseInt(req.params.id));
   if (!task) return res.status(404).json({ message: 'Task not found' });
