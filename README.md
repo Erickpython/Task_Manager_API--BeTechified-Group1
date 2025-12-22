@@ -106,6 +106,12 @@ Base URL: `http://localhost:<PORT>`
 
 ---
 
+## API Documentation 📘
+
+Full, interactive Postman documentation is available here: [View API documentation](https://documenter.getpostman.com/view/50854156/2sB3dWs7HU)
+
+---
+
 ## Examples (curl) 🧪
 
 Get all tasks:
