@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 3000; // fallback to 3000 if env is missing;
 
 //  Middleware to parse JSON requests
 app.use(express.json());
@@ -66,11 +66,14 @@ app.post('/tasks', (req, res) => {
   };
 
   // Check if a task with the same title already exists
-  const existingTask = tasks.find(t => t.title === newTask.title);
-  const existingstatus = tasks.find(t => t.status === newTask.status);
-  if (existingTask && existingstatus) {
-    return res.status(409).json({ message: 'Task already exists' });
-  }
+const existingTask = tasks.find(
+  t => t.title.toLowerCase() === newTask.title.toLowerCase()
+);
+
+if (existingTask) {
+  return res.status(409).json({ message: 'Task with this title already exists' });
+}
+
 
   tasks.push(newTask);
   res.status(201).json(newTask);
